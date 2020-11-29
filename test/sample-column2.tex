@@ -1,0 +1,116 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  a4paper,
+  lualatex,
+  ja=standard]{bxjsarticle}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+  \usepackage{amssymb}
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% ruby
+\usepackage{luatexja-ruby}
+
+% tcolorbox
+\usepackage{tcolorbox}
+\tcbuselibrary{xparse}
+\tcbuselibrary{skins}
+\tcbuselibrary{breakable}
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\author{}
+\date{}
+
+\begin{document}
+
+\tcbset{
+breakable,
+enhanced,
+parbox=false,
+colbacktitle=black,
+}
+
+\hypertarget{luaux30d5ux30a3ux30ebux30bf-tcolorbox-column.lua-ux306eux4f8b}{%
+\section{Luaフィルタ tcolorbox-column.lua
+の例}\label{luaux30d5ux30a3ux30ebux30bf-tcolorbox-column.lua-ux306eux4f8b}}
+
+\begin{verbatim}
+::: box
+タイトルのない囲みです。
+:::
+\end{verbatim}
+
+\begin{tcolorbox}
+
+タイトルのない囲みです。
+
+\end{tcolorbox}
+
+\begin{verbatim}
+::: {.box title=タイトル付きの囲み}
+タイトル付きの囲みです。
+:::
+\end{verbatim}
+
+\begin{tcolorbox}[title=タイトル付きの囲み,]
+
+タイトル付きの囲みです。
+
+\end{tcolorbox}
+
+\begin{verbatim}
+::: {.column title="何らかの小話"}
+タイトルの頭に `■コラム: ` （または`column-prefix`メタデータで指定された文字列）が付きます。
+:::
+\end{verbatim}
+
+\begin{tcolorbox}[title=【コラム】何らかの小話,]
+
+タイトルの頭に \texttt{■コラム:}
+（または\texttt{column-prefix}メタデータで指定された文字列）が付きます。
+
+\end{tcolorbox}
+
+\begin{verbatim}
+::: {.column title="何らかの小話" option="colbacktitle=black"}
+オプション付きです。
+:::
+\end{verbatim}
+
+\begin{tcolorbox}[title=【コラム】何らかの小話,colbacktitle=black]
+
+オプション付きです。
+
+\end{tcolorbox}
+
+\end{document}

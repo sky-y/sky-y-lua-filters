@@ -1,0 +1,19 @@
+% dot.istとほぼ同じの索引スタイル
+% 
+% LuaTeX+makeindex - Luoyang Press
+% https://ratbeta.hatenadiary.org/entry/20120406/1333717913
+%
+% （補足）オリジナルのdot.istはリンク切れ。
+% http://www.biwako.shiga-u.ac.jp/sensei/kumazawa/tex/etc03.html
+preamble
+"\n\\begin{theindex}\n"
+postamble
+"\n\n \\end{theindex}\n"
+delim_0   "\\dotfill "
+delim_1   "\\dotfill "
+delim_2   "\\dotfill "
+heading_prefix
+"{\\vbox{\\hbox to \\linewidth{\\sffamily\\bfseries\\gtfamily\\small "
+heading_suffix
+"\\ \\hskip\\fill}\\vskip1pt\\hrule}}\\nopagebreak\n"
+headings_flag      1

@@ -1,0 +1,182 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  a4paper,
+  lualatex,
+  ja=standard]{bxjsarticle}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+  \usepackage{amssymb}
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% ruby
+\usepackage{pxrubrica}
+
+% tcolorbox
+\usepackage{tcolorbox}
+\tcbuselibrary{xparse}
+\tcbuselibrary{skins}
+\tcbuselibrary{breakable}
+
+% enjoy :)
+\usepackage{scsnowman}
+% index
+\usepackage{makeidx}
+\makeindex
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\author{}
+\date{}
+
+\begin{document}
+
+\hypertarget{ux6e96ux5099}{%
+\subsection{準備}\label{ux6e96ux5099}}
+
+テンプレート変数として、次のヘッダ（プリアンブル）を読み込む。
+
+\begin{verbatim}
+\usepackage{makeidx}
+\makeindex
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  パターン1：ヘッダファイルとして読み込む
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{pandoc\ ...\ -H\ header.tex}
+  \end{itemize}
+\item
+  パターン2：コマンドラインで直接指定する
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{pandoc\ ...\ -V\ header-includes="\textbackslash{}usepackage\{makeidx\}"\ -V\ header-includes="\textbackslash{}makeindex"}
+  \end{itemize}
+\item
+  パターン3：デフォルトファイルに指定する
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{pandoc\ ...\ -d\ defaults.yaml}
+  \end{itemize}
+\end{itemize}
+
+\begin{verbatim}
+variables:
+  header-includes: |
+    \usepackage{makeidx}
+    \makeindex
+\end{verbatim}
+
+\hypertarget{ux6ce8ux610f}{%
+\subsection{注意}\label{ux6ce8ux610f}}
+
+テンプレート変数の指定が重複する場合は要注意。
+
+\begin{itemize}
+\tightlist
+\item
+  テンプレート変数同士は、重ねると追記される（上書きしない）
+
+  \begin{itemize}
+  \tightlist
+  \item
+    ヘッダファイル読み込み（\texttt{-H}/\texttt{-\/-include-in-header}）でも、変数の直接指定（\texttt{-V\ header-includes=}）でも同じ
+  \item
+    同じヘッダ内容を複数回読まないように注意
+  \end{itemize}
+\item
+  メタデータとテンプレートの組み合わせでは、テンプレートがメタデータを上書きする
+\end{itemize}
+
+\hypertarget{ux4f8b}{%
+\subsection{例}\label{ux4f8b}}
+
+1 {Pandoc\index{Pandoc}}
+
+2 {Pandoc's Markdown\index{Pandoc's Markdown}}
+
+3 {けいおん!\index{けいおん"!}}
+
+4 {aaa@bbb\index{aaa"@bbb}}
+
+5 {ccc\textbar ddd\index{ccc\textbar{}ddd}}
+
+6 {免疫\index{めんえき@免疫}}
+
+7(only) {\index{LaTeX}}
+
+8(only) {\index{へんすう@変数}}
+
+9 {mendex\index{mendex}}
+
+10(raw) mendexの使い方{\index{mendex!のつかいかた@---の使い方}}
+
+11(keyword) {\textbf{Markdown}\index{Markdown}}
+
+12(keyword) {\textbf{技術書典}\index{ぎじゅつしょてん@技術書典}}
+
+13 {-\/-standalone\index{--standalone}}
+
+14(code) {\texttt{-\/-template}\index{--template@\texttt{--template}}}
+
+15(code only) {\index{--lua-filter@\texttt{--lua-filter}}}
+
+16(raw\_tex) -\/-filter\index{--filter@\texttt{--filter}}
+
+17(only)
+\scsnowman[snow,hat=true,muffler=red,arms=true,scale=3]{\index{本質@}}
+
+\phantomsection
+
+\addcontentsline{toc}{chapter}{\indexname}
+
+\printindex
+
+\end{document}

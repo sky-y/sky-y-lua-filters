@@ -1,0 +1,4 @@
+variables:
+  header-includes: |
+    \usepackage{makeidx}
+    \makeindex

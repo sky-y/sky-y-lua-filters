@@ -1,0 +1,223 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  a4paper,
+  lualatex,
+  ja=standard]{bxjsarticle}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+  \usepackage{amssymb}
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% ruby
+\usepackage{pxrubrica}
+
+% tcolorbox
+\usepackage{tcolorbox}
+\tcbuselibrary{xparse}
+\tcbuselibrary{skins}
+\tcbuselibrary{breakable}
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\author{}
+\date{}
+
+\begin{document}
+
+\hypertarget{latexux306eux30ebux30d3ux7528ux30d5ux30a3ux30ebux30bf}{%
+\section{LaTeXのルビ用フィルタ}\label{latexux306eux30ebux30d3ux7528ux30d5ux30a3ux30ebux30bf}}
+
+下記のLaTeXパッケージに依存する。
+
+\begin{itemize}
+\tightlist
+\item
+  pxrubrica
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{\textbackslash{}usepackage\{pxrubrica\}}
+    をヘッダ（プリアンブル）に読み込む
+  \item
+    詳細
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \href{https://qiita.com/zr_tex8r/items/42466cbcbeb670a3a2dc}{LaTeX
+      文書で``美しい日本の''ルビを使う ～pxrubrica パッケージ～ - Qiita}
+    \item
+      マニュアル
+      \href{http://texdoc.net/texmf-dist/doc/platex/pxrubrica/pxrubrica.pdf}{pxrubrica
+      パッケージ}
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+※ luatexja-ruby パッケージには非対応。
+
+\hypertarget{ux69cbux6587}{%
+\subsection{構文}\label{ux69cbux6587}}
+
+\begin{verbatim}
+[親文字](ルビ文字){.ruby}
+[alphabet](欧文ルビ文字){.aruby}  ※ pxrubricaのみ
+\end{verbatim}
+
+オプションはPandoc's Markdownの属性(attribute)として与える。
+オプションの構文自体は両パッケージとも共通に使える。
+
+構文（Pandoc's Markdown）：
+
+\begin{verbatim}
+[親文字](ルビ){.ruby opt="オプション"}
+\end{verbatim}
+
+たとえば
+
+\begin{verbatim}
+[雲雀](ひばり){.ruby opt="g"}
+\end{verbatim}
+
+は
+
+\begin{verbatim}
+\ruby[g]{雲雀}{ひばり}
+\end{verbatim}
+
+に変換される。
+
+\hypertarget{ux4f8b}{%
+\subsection{例}\label{ux4f8b}}
+
+\hypertarget{ux4f8b1}{%
+\subsubsection{例1}\label{ux4f8b1}}
+
+Markdown：
+
+\begin{verbatim}
+あれは[鷹](たか){.ruby}ではなく[鶯](うぐいす){.ruby}です。
+\end{verbatim}
+
+出力結果：
+
+あれは{\ruby{鷹}{たか}}ではなく{\ruby{鶯}{うぐいす}}です。
+
+\hypertarget{ux4f8b2}{%
+\subsubsection{例2}\label{ux4f8b2}}
+
+Markdown：
+
+\begin{verbatim}
+[小鳩](こ|ばと){.ruby} [孔雀](く|じゃく){.ruby} [七面鳥](しち|めん|ちょう)
+\end{verbatim}
+
+出力結果：
+
+{\ruby{小鳩}{こ|ばと}} {\ruby{孔雀}{く|じゃく}}
+{\ruby{七面鳥}{しち|めん|ちょう}}
+
+\hypertarget{ux4f8b3ux570fux70b9}{%
+\subsubsection{例3（圏点）}\label{ux4f8b3ux570fux70b9}}
+
+Markdown：
+
+\begin{verbatim}
+[本質]{.kenten}
+\end{verbatim}
+
+出力結果：
+
+{\kenten{本質}}
+
+\hypertarget{ux4f8b4ux30b0ux30ebux30fcux30d7ux30ebux30d3}{%
+\subsubsection{例4（グループルビ）}\label{ux4f8b4ux30b0ux30ebux30fcux30d7ux30ebux30d3}}
+
+Markdown：
+
+\begin{verbatim}
+[雲雀](ひ|ばり){.ruby opt="g"} [不如帰](ほととぎす){.ruby opt="g"}
+\end{verbatim}
+
+出力結果：
+
+{\ruby[g]{雲雀}{ひばり}} {\ruby[g]{不如帰}{ほととぎす}}
+
+\hypertarget{ux4f8b5ux30e2ux30ceux30ebux30d3}{%
+\subsubsection{例5（モノルビ）}\label{ux4f8b5ux30e2ux30ceux30ebux30d3}}
+
+Markdown：
+
+\begin{verbatim}
+[孔雀](く|じゃく){.ruby opt="m"} [七面鳥}(しち|めん|ちょう){.ruby opt="m"}
+\end{verbatim}
+
+出力結果：
+
+{\ruby[m]{孔雀}{く|じゃく}}
+{[}七面鳥\}(しち\textbar めん\textbar ちょう)\{.ruby opt="m"\}
+
+\hypertarget{ux4f8b6arubyux6b27ux6587ux7528ux306eux30ebux30d3}{%
+\subsection{\texorpdfstring{例6（\texttt{\textbackslash{}aruby}：欧文用のルビ）}{例6（\textbackslash aruby：欧文用のルビ）}}\label{ux4f8b6arubyux6b27ux6587ux7528ux306eux30ebux30d3}}
+
+pxrubricaにおける\texttt{\textbackslash{}aruby}（欧文用のルビ）の構文も用意している。
+
+構文：
+
+\begin{verbatim}
+[alphabet](ルビ){.aruby}
+\end{verbatim}
+
+Markdown：
+
+\begin{verbatim}
+[Pandoc](パンドック){.aruby}と[Markdown](マークダウン){.aruby}
+\end{verbatim}
+
+出力結果：
+
+{\aruby{Pandoc}{パンドック}}と{\aruby{Markdown}{マークダウン}}
+
+注意：\texttt{\textbackslash{}truby}や\texttt{\textbackslash{}atruby}などは提供しない。
+
+\end{document}

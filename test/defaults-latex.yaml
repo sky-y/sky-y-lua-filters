@@ -1,0 +1,13 @@
+from: markdown-smart
+standalone: true
+pdf-engine: latexmk
+include-in-header: 
+  - header.tex
+data-dir: ..
+variables:
+  documentclass: bxjsarticle
+  papersize: a4
+  classoption:
+    - lualatex
+    - ja=standard
+  
