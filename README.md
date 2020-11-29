@@ -41,3 +41,7 @@ Pandoc側で構文エラーを検出できないため、エラー時はLaTeX側
             - after: `"@ "! "|` (ダブルクォートでエスケープ)
             - see: [QA: 索引で%や&などの文字を表示させるには](https://oku.edu.mie-u.ac.jp/tex/mod/forum/discuss.php?d=2508)
 - 可能性3: フィルタのバグかもしれません
+
+## ライセンス
+
+MIT License
