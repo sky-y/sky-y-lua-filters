@@ -1,47 +1,30 @@
-# Luaフィルタ関連
+# 自作 Pandoc Luaフィルタ by sky-y
 
-## オリジナルLuaフィルタ
-
-使用例はそれぞれのluaファイルのコメントを参照。
+使用例はそれぞれのluaファイルのコメント、およびtestディレクトリのファイルを参照。
 
 - tcolorbox-column.lua
     - 囲み・コラム
-- luatexja-ruby.lua
-    - ルビ (luatexja-ruby パッケージ準拠)
+- pxrubrica-ruby.lua
+    - ルビ (pxrubrica パッケージ準拠)
 - latex-index.lua
     - 索引 (upmendex 準拠)
 - utils.lua
-    - 上記が依存するユーティリティ関数
+    - ユーティリティ関数（上記フィルタを実際に使う際には不要）
 
-## 外部Luaフィルタ
+## 外部のLuaフィルタ
 
-- 公式の Lua Filters ([pandoc/lua-filters](https://github.com/pandoc/lua-filters) )
-    - [include-code-files](https://github.com/pandoc/lua-filters/tree/master/include-code-files)
-        - ソースコードをPandoc's Markdownに取り込むフィルタ
 - [jagt/pprint.lua](https://github.com/jagt/pprint.lua)
     - 変数をダンプ (デバッグ用)
-
-## その他のファイル
-
-- munepi-index.ist/tex
-    - LaTeXの索引スタイル (munepiさん)
-    - [ぼくのかんがえたさいきょうのLaTeX索引スタイルファイル - Qiita](https://qiita.com/munepi/items/2e1524859e24b5fb44bc)
-
-# Todo
-
-- [x] ルビフィルタ
-- [x] 索引フィルタ
-- [x] デバッグ
-    - [x] ルビフィルタを適用すると索引が消えてしまう問題
-    - [ ] `\index` のエスケープ文字問題：特定文字を置換する
-- [ ] コラム（tcolorbox）
+    - public domain
 
 ## トラブルシューティング
 
-問題の切り分けを推奨します。
+Pandoc側で構文エラーを検出できないため、エラー時はLaTeX側でエラーになることがほとんどです。
+問題が起こった際は、問題の切り分けを推奨します。
 
-- Pandocの問題：`-t latex`でソースのみを出力してみる
-- LaTeXの問題：Pandocから出力したソースを単品で`lualatex`にかけてみる
+- `-t latex`でLaTeXソースのみを出力してみる
+    - 表示されるエラー番号は、たいていの場合LaTeXソースの方です
+- そのLaTeXソースを単品で`lualatex`に読み込ませてみる
 
 ### Q: PDF出力中に無限ループになる
 
