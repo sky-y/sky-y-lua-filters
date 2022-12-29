@@ -8,6 +8,9 @@
     - ルビ (pxrubrica パッケージ準拠)
 - latex-index.lua
     - 索引 (upmendex 準拠)
+- fix-header-inconsistency.lua
+    - ヘッダのレベルが2以上増えたときに、1だけ増やすようにする
+    - 主にSphinxで `CRITICAL: Title level inconsistent` エラーが出たときの対処として作った
 - utils.lua
     - ユーティリティ関数（上記フィルタを実際に使う際には不要）
 
@@ -16,6 +19,9 @@
 - [jagt/pprint.lua](https://github.com/jagt/pprint.lua)
     - 変数をダンプ (デバッグ用)
     - public domain
+- [wlupton/pandoc-lua-logging](https://github.com/wlupton/pandoc-lua-logging)
+    - オブジェクトを見やすくダンプ（デバッグ用）
+    - MIT License
 
 ## トラブルシューティング
 
